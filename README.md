@@ -135,6 +135,20 @@ success=True after 2 attempt(s)
 
 Constraints compose - `demo.py --word sandwich --min-words 60` requires both.
 
+### Web app
+
+```bash
+streamlit run streamlit_app.py
+```
+
+The same loop with a browser front end: every draft, every constraint check and
+the strategy injected after each failure are laid out attempt by attempt.
+
+**Deploy it:** on [share.streamlit.io](https://share.streamlit.io), *New app* ->
+pick this repository -> main file `streamlit_app.py`. The weights are fetched
+from the release on first load, and `requirements.txt` pins the CPU-only
+PyTorch build so the image stays inside the free tier's build limits.
+
 ---
 
 ## Adding a constraint

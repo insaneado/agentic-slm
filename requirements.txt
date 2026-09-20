@@ -1,3 +1,8 @@
+# Install the CPU-only PyTorch build. The default PyPI wheel bundles CUDA
+# and is several GB, which exceeds the build limits on free hosting tiers
+# (Streamlit Community Cloud, Hugging Face Spaces).
+--extra-index-url https://download.pytorch.org/whl/cpu
+
 # Core
 torch>=2.1.0
 numpy>=1.24.0
@@ -6,6 +11,9 @@ tiktoken>=0.5.0
 # Data pipeline
 datasets>=2.14.0
 tqdm>=4.65.0
+
+# Web app
+streamlit>=1.30.0
 
 # Plots (loss curves)
 matplotlib>=3.7.0
