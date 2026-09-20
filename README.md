@@ -98,27 +98,39 @@ pytest tests/ -q
 The agent loop is tested against a scripted fake model, so the control flow is
 verifiable without training anything.
 
-**Train the model** (needs a GPU for the full 20k steps):
+**Run the agent** - the trained weights download automatically on first run:
+
+```bash
+python demo.py --prompt "Once upon a time there was a dog" --word sandwich
+```
+
+The checkpoint (~115MB) is published as a
+[release asset](https://github.com/insaneado/agentic-slm/releases/tag/v1.0)
+rather than committed, because it exceeds GitHub's 100MB per-file limit for
+tracked files. Pass `--no-download` to skip the fetch and run on an untrained
+model (the loop still works; the prose is gibberish).
+
+**Or train it yourself** (needs a GPU for the full 20k steps):
 
 ```bash
 python -m src.data      # download + tokenize TinyStories into data/*.bin
 python -m src.train     # writes best_model_params.pt
 ```
 
-**Run the agent:**
-
-```bash
-python demo.py --prompt "Once upon a time there was a dog" --word sandwich
-```
+Actual output from the trained checkpoint:
 
 ```
+Loaded checkpoint: best_model_params.pt
 [PLAN]  goal: Once upon a time there was a dog
         constraint: output must contain the word 'sandwich'
-[ACT]    attempt 1: Once upon a time there was a dog. He liked to run...
+[ACT]    attempt 1: Once upon a time there was a dog named Max. Max was very curious...
 [OBSERVE] failed: contains:sandwich
-[REFLECT] switching tactic -> '...a huge sandwich appeared right in front of them.'
-[ACT]    attempt 2: ...Suddenly, a huge sandwich appeared. The dog ate it...
+[REFLECT] switching tactic -> '...d down and saw a sandwich on the ground.'
+[ACT]    attempt 2: Once upon a time there was a dog They looked down and saw a
+                    sandwich on the ground. The boy was so excited! He quickly
+                    went up to the swing and said: "Look, I found a sandwich!"
 [OBSERVE] all 1 constraint(s) satisfied
+success=True after 2 attempt(s)
 ```
 
 Constraints compose - `demo.py --word sandwich --min-words 60` requires both.
