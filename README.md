@@ -86,8 +86,12 @@ demo.py           # run the agent from the command line
 ```bash
 git clone https://github.com/insaneado/agentic-slm.git
 cd agentic-slm
-pip install -r requirements.txt
+pip install -r requirements.txt          # runtime: the agent and the web app
+pip install -r requirements-dev.txt      # adds training and test dependencies
 ```
+
+`requirements.txt` holds only what the deployed app needs, so a free-tier build
+does not pull the dataset and plotting stack it never imports.
 
 **Run the tests** (no GPU, no checkpoint, no dataset needed):
 

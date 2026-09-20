@@ -1,0 +1,13 @@
+# Everything in the runtime set, plus what is needed to build the dataset,
+# train the model and run the tests.
+-r requirements.txt
+
+# Data pipeline (src/data.py)
+datasets>=2.14.0
+tqdm>=4.65.0
+
+# Plots (loss curves)
+matplotlib>=3.7.0
+
+# Tests
+pytest>=7.4.0
